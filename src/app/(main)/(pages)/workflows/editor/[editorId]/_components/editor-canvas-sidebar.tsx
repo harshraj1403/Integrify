@@ -25,7 +25,7 @@ import {
     AccordionTrigger,
   } from '@/components/ui/accordion'
   import RenderConnectionAccordion from './render-connection-accordion'
- //import RenderOutputAccordion from './render-output-accordian'
+ import RenderOutputAccordion from './render-output-accordian'
    import { useFuzzieStore } from '@/store'
 
 type Props={
@@ -91,6 +91,19 @@ const EditorCanvasSidebar = ({ nodes }: Props) => {
                   />
                 ))}
               </AccordionContent>
+  
+            </AccordionItem>
+            <AccordionItem
+              value="Expected Output"
+              className="px-2"
+            >
+              <AccordionTrigger className="!no-underline">
+                Action
+              </AccordionTrigger>
+              {/* <RenderOutputAccordion
+                state={state}
+                nodeConnection={nodeConnection}
+              /> */}
             </AccordionItem>
          </Accordion>
         </TabsContent>
