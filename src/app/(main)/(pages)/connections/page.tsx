@@ -88,7 +88,7 @@ const Connections = async (props: Props) => {
 
     const connections: any = {}
 
-    const user_info = await getUserData(user.id)
+   const user_info = await getUserData(user.id)
 
     //get user info with all connections
     user_info?.connections.map((connection) => {

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { MenuIcon } from 'lucide-react'
 import { UserButton  } from '@clerk/nextjs'
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from '@clerk/nextjs/server'  
 
 type Props = {}
 

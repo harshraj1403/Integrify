@@ -12,7 +12,7 @@ import Image from 'next/image'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { toast } from 'sonner'
-//import { onFlowPublish } from '../_actions/workflow-connections'
+import { onFlowPublish } from '../_actions/workflow-connections'
  type Props={
 name :string
 description: string
@@ -22,11 +22,11 @@ publish:boolean|null
  }
 const Workflow = ({description,id,name,publish}:Props) => {
     const onPublishFlow = async (event: any) => {
-    //   const response = await onFlowPublish(
-    //       id,
-    //       event.target.ariaChecked === 'false'
-    //     )
-    //     if (response) toast.message(response)
+      const response = await onFlowPublish(
+          id,
+          event.target.ariaChecked === 'false'
+        )
+        if (response) toast.message(response)
      }
     
 
@@ -73,7 +73,7 @@ const Workflow = ({description,id,name,publish}:Props) => {
         </Label>
         <Switch
           id="airplane-mode"
-          // onClick={onPublishFlow}
+          onClick={onPublishFlow}
           defaultChecked={publish!}
         />
       </div>
