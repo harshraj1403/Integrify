@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -18,32 +18,41 @@ import { Button } from '../ui/button'
 import { Loader2 } from 'lucide-react'
 
 type Props = {
-  user: any
-  onUpdate?: any
+  user: {
+    name?: string
+    email?: string
+  } | null
+  onUpdate?: (name: string) => Promise<void>
 }
 
-const ProfileForm = ({ user, onUpdate }: Props) => {
+const ProfileForm = ({ user = null, onUpdate }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
+  
+  // Initialize form with empty default values if user is null
   const form = useForm<z.infer<typeof EditUserProfileSchema>>({
     mode: 'onChange',
     resolver: zodResolver(EditUserProfileSchema),
     defaultValues: {
-      name: user.name,
-      email: user.email,
+      name: user?.name || '',
+      email: user?.email || '',
     },
   })
 
   const handleSubmit = async (
     values: z.infer<typeof EditUserProfileSchema>
   ) => {
-    setIsLoading(true)
-    await onUpdate(values.name)
-    setIsLoading(false)
+    if (onUpdate) {
+      setIsLoading(true)
+      await onUpdate(values.name)
+      setIsLoading(false)
+    }
   }
 
   useEffect(() => {
-    form.reset({ name: user.name, email: user.email })
-  }, [user])
+    if (user) {
+      form.reset({ name: user.name, email: user.email })
+    }
+  }, [user, form])
 
   return (
     <Form {...form}>
